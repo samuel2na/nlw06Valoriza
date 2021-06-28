@@ -1,6 +1,12 @@
 {
-    "type": "sqlite",
-    "database": "src/database/database.sqlite",
+    "type": "mysql",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "username": "root",
+    "password": "",
+    "database": "test",
+    "synchronize": true,
+    "logging": false,
     "migrations": ["src/database/migrations/*.ts"],
     "entities": ["src/entities/*.ts"],
     "cli": {
