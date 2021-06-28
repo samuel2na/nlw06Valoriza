@@ -1,9 +1,9 @@
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository, getConnection } from "typeorm";
 import { TagsRepositories } from "../repositories/TagsRepositories";
 
-class UpdateTagService {
+class DeleteTagService {
 
-    async execute(name: string, tag_id: string){
+    async execute(tag_id: string){
 
         const tagRepo = getCustomRepository(TagsRepositories);
 
@@ -14,11 +14,12 @@ class UpdateTagService {
             return message;
         }
 
-        const result = await tagRepo.update(tag_id, { name: name });
-        const newUpdated = { ...tagExists, name}
+        const result = await tagRepo.delete(tag_id);
 
-        return newUpdated;
+        const message = { message: "tag deleted successfully" }
+        return message;
+        
     }
 }
 
-export { UpdateTagService };
+export { DeleteTagService };

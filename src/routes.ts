@@ -10,21 +10,26 @@ import { ListUserReceiveComplimentsController } from "./controllers/ListUserRece
 import { ListTagsController } from "./controllers/ListTagsController";
 import { ListUsersController } from "./controllers/ListUsersController";
 import { UpdateTagController } from "./controllers/UpdateTagController";
+import { DeleteTagController } from "./controllers/DeleteTagsController";
 
 const router = Router();
 const createUserController = new CreateUserController();
 const createTagController = new CreateTagController();
-const authenticateUserController = new AuthenticateUserController();
 const createComplimentController = new CreateComplimentController();
+const authenticateUserController = new AuthenticateUserController();
+
+const listUsersController = new ListUsersController();
 const listUserSendComplimentsController = new ListUserSendComplimentsController();
 const listUserReceiveComplimentsController = new ListUserReceiveComplimentsController();
 const listTagsController = new ListTagsController();
-const listUsersController = new ListUsersController();
+
 const updateTagsController = new UpdateTagController();
+const deleteTagsController = new DeleteTagController();
 
 router.post("/tags", ensureAuthenticated, ensureAdmin, createTagController.handle);
 router.get("/tags", ensureAuthenticated, listTagsController.handle);
-router.post("/tag", ensureAuthenticated, updateTagsController.handle);
+router.put("/tag", ensureAuthenticated, ensureAdmin, updateTagsController.handle);
+router.delete("/tag", ensureAuthenticated, ensureAdmin, deleteTagsController.handle);
 
 router.post("/users", createUserController.handle);
 router.get("/users", ensureAuthenticated, listUsersController.handle);
